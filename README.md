@@ -6,7 +6,21 @@ Este projeto é um backend de autenticação construído com NestJS, TypeORM, e 
 
 ## 📁 Estrutura do Projeto
 
-<pre> ``` src/ ├── auth/ │ ├── controller/ # Endpoints HTTP expostos pelo AuthController │ ├── dto/ # DTOs (Data Transfer Objects) com validações │ ├── entity/ # Entidades persistidas no banco │ ├── ports/ # Interfaces (EncryptionService, LoginRepository) │ ├── repository/ # Implementações concretas do LoginRepository │ ├── service/ # Serviço de criptografia JWE │ ├── usecase/ # Casos de uso: login, decrypt, history │ ├── injection-tokens.ts # Tokens de injeção de dependência │ └── auth.module.ts # Módulo principal do domínio auth ├── seed.ts # Script de seed para popular dados de exemplo └── main.ts # Bootstrap da aplicação Nest ``` </pre>
+```
+src/
+├── auth/
+│ ├── controller/ # Endpoints HTTP expostos pelo AuthController
+│ ├── dto/ # DTOs (Data Transfer Objects) com validações
+│ ├── entity/ # Entidades persistidas no banco
+│ ├── ports/ # Interfaces (EncryptionService, LoginRepository)
+│ ├── repository/ # Implementações concretas do LoginRepository
+│ ├── service/ # Serviço de criptografia JWE
+│ ├── usecase/ # Casos de uso: login, decrypt, history
+│ ├── injection-tokens.ts # Tokens de injeção de dependência
+│ └── auth.module.ts # Módulo principal do domínio auth
+├── seed.ts # Script de seed para popular dados de exemplo
+└── main.ts # Bootstrap da aplicação Nest
+```
 
 ---
 
