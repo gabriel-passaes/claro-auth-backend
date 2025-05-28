@@ -51,8 +51,8 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      - name: 🧪 Run tests with coverage
-        run: npm run test:cov
+      - name: 🧪 Run tests 
+        run: npm run test
 
       - name: 📤 Upload coverage to Codecov
         if: success()
