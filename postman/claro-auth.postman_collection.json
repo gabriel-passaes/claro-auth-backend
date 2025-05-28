@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "Claro Auth",
+    "_postman_id": "35e5868d-ffaa-4ec6-a2bd-1a8c660347e3",
+    "description": "Coleção de testes para autenticação com JWE",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/login",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "login"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": ["const res = pm.response.json();", "pm.environment.set(\"jwe\", res.jwe);"],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Decrypt",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jwe\": \"{{jwe}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/decrypt",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "decrypt"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "History",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/auth/history",
+          "host": ["{{base_url}}"],
+          "path": ["auth", "history"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

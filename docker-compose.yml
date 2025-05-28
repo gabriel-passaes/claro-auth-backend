@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: claro-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: claro_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - claro_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: claro-backend
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app:cached
+      - /usr/src/app/node_modules
+      - ./keys:/usr/src/app/keys
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: claro_db
+      PUBLIC_KEY: /usr/src/app/keys/public.pem
+      PRIVATE_KEY: /usr/src/app/keys/private.pem
+    command: pnpm start:dev
+
+volumes:
+  claro_pg_data:
